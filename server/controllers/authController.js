@@ -49,6 +49,20 @@ export const register = asyncHandler(async (req, res) => {
     throw new Error(error.message);
   }
 });
+export const update = asyncHandler(async (req, res) => {
+  const { profilePic } = req.body;
+  const { userId } = req.params;
+  console.log(userId, profilePic);
+
+  try {
+    const result = await User.findOneAndUpdate({ _id: userId }, { profilePic }, { new: true });
+
+    res.status(201).json(result);
+  } catch (error) {
+    res.status(500);
+    throw new Error(error.message);
+  }
+});
 
 export const login = asyncHandler(async (req, res) => {
   const { email, password } = req.body;

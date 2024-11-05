@@ -38,6 +38,7 @@ const MessageBox = () => {
     socket.on("typing", () => setIsTyping(true));
     socket.on("not typing", () => setIsTyping(false));
   }, [auth]);
+
   React.useEffect(() => {
     socket.on("message received", (newMessage) => {
       if (!chatCompare || chatCompare._id !== newMessage.chat._id) {

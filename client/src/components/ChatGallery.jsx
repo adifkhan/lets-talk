@@ -1,7 +1,7 @@
 import { Avatar, Box, Tooltip } from "@chakra-ui/react";
 import React from "react";
 import MessageItem from "./MessageItem";
-import { isLastMessage, isSameSender } from "../utils/myFunc";
+import { isSameSenderLastMessage } from "../utils/myFunc";
 import { GlobalState } from "../context/chatContext";
 
 const ChatGallery = ({ messages }) => {
@@ -33,7 +33,7 @@ const ChatGallery = ({ messages }) => {
         gap: 1,
         width: "100%",
         bgColor: "#E8E8E8",
-        p: 3,
+        p: { base: 1.5, md: 3 },
         borderRadius: "sm",
       }}
     >
@@ -46,7 +46,7 @@ const ChatGallery = ({ messages }) => {
               display: "flex",
             }}
           >
-            {isSameSender(messages, msg, i, auth?._id) || isLastMessage(messages, i, auth?._id) ? (
+            {isSameSenderLastMessage(messages, msg, i, auth?._id) ? (
               <Tooltip label={msg.sender.name}>
                 <Avatar
                   name={msg?.sender.name}
@@ -54,6 +54,7 @@ const ChatGallery = ({ messages }) => {
                   size="xs"
                   mt={1}
                   cursor="pointer"
+                  border="2px solid teal"
                 />
               </Tooltip>
             ) : (
@@ -67,3 +68,5 @@ const ChatGallery = ({ messages }) => {
 };
 
 export default ChatGallery;
+
+// || isLastMessage(messages, i, auth?._id)

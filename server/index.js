@@ -13,11 +13,7 @@ const PORT = process.env.PORT || 8000;
 connectDb();
 const app = express();
 
-const allowedOrigins = [
-  "https://lets-talk-chatapp.vercel.app",
-  "https://chatgood.netlify.app",
-  "http://localhost:3000",
-];
+const allowedOrigins = ["https://lets-talk-rjff.onrender.com/", "http://localhost:3000"];
 
 //------ middlewares --------//
 app.use((req, res, next) => {
@@ -25,20 +21,20 @@ app.use((req, res, next) => {
   next();
 });
 app.use(express.json());
-// app.use(
-//   cors({
-//     origin: (origin, callback) => {
-//       if (!origin || allowedOrigins.includes(origin)) {
-//         callback(null, true);
-//       } else {
-//         callback(new Error("Not allowed by CORS"));
-//       }
-//     },
-//     methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
-//     credentials: true,
-//     optionsSuccessStatus: 200,
-//   })
-// );
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
+    credentials: true,
+    optionsSuccessStatus: 200,
+  })
+);
 app.use(cookieParser());
 
 //------------- routes ------------//
@@ -91,7 +87,7 @@ const io = new Server(server, {
 });
 
 io.on("connection", (socket) => {
-  console.log("connected to socket.io");
+  console.log("socket.io");
 
   socket.on("setup", (userData) => {
     socket.join(userData?._id);
@@ -110,9 +106,8 @@ io.on("connection", (socket) => {
     const chat = newMessage?.chat;
 
     await Notification.create({
-      // sender: newMessage?.sender?._id,
-      receiver: newMessage?.chat?.users,
-      chat: newMessage?.chat?._id,
+      receiver: chat?.users,
+      chat: chat?._id,
     });
 
     if (!chat?.users) return;

@@ -33,7 +33,7 @@ const Chats = () => {
         width="100%"
         height="calc(100vh - 50px)"
         minHeight="400px"
-        p="10px"
+        p={{ base: "5px", md: "10px" }}
       >
         <LeftBar />
         <MessageBox />

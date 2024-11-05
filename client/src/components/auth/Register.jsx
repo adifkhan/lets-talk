@@ -40,7 +40,7 @@ const Register = () => {
       setLoading(false);
       return;
     }
-    let imgUrl = "";
+    let imgUrl;
     if (imgData) {
       imgUrl = await imageUploader(imgData);
     }

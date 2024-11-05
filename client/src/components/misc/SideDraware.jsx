@@ -44,11 +44,11 @@ const SideDraware = ({ children }) => {
         <DrawerOverlay />
         <DrawerContent>
           <DrawerCloseButton />
-          <DrawerHeader>Search Users</DrawerHeader>
+          <DrawerHeader>Search Friends</DrawerHeader>
 
           <DrawerBody display="flex" flexDirection="column" gap={4}>
             <Box>
-              <Input placeholder="Search user by name or email" onChange={handleSearch} />
+              <Input placeholder="Enter name or email" onChange={handleSearch} />
             </Box>
             {loading ? (
               <Stack spacing={0.5}>

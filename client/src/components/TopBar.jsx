@@ -38,7 +38,7 @@ const TopBar = () => {
       <SideDraware>
         <IoSearch />
         <Text display={{ base: "none", md: "flex" }} px={3} color={"gray"} fontWeight={400}>
-          Search Users
+          Search Friends
         </Text>
       </SideDraware>
       <Text fontSize="2xl" fontWeight={500}>
@@ -46,8 +46,12 @@ const TopBar = () => {
       </Text>
 
       <Menu>
-        <MenuButton as={Button} rightIcon={<IoChevronDownCircleOutline size={12} />}>
-          <Avatar name={auth?.name} src={auth?.profilePic} size="xs" cursor="pointer" />
+        <MenuButton
+          as={Button}
+          colorScheme="teal"
+          rightIcon={<IoChevronDownCircleOutline size={12} />}
+        >
+          <Avatar name={auth?.name} src={auth?.profilePic} size="sm" cursor="pointer" />
         </MenuButton>
         <MenuList>
           <ProfileModal user={auth}>
