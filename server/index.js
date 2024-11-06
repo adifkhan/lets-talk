@@ -20,22 +20,24 @@ app.use((req, res, next) => {
   res.header("Access-Control-Allow-Credentials", true);
   next();
 });
+
 app.use(express.json());
-app.use(
-  cors({
-    origin: (origin, callback) => {
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
-      }
-    },
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
-    credentials: true,
-    optionsSuccessStatus: 200,
-  })
-);
 app.use(cookieParser());
+
+// app.use(
+//   cors({
+//     origin: (origin, callback) => {
+//       if (!origin || allowedOrigins.includes(origin)) {
+//         callback(null, true);
+//       } else {
+//         callback(new Error("Not allowed by CORS"));
+//       }
+//     },
+//     methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
+//     credentials: true,
+//     optionsSuccessStatus: 200,
+//   })
+// );
 
 //------------- routes ------------//
 import authRoutes from "./routes/authRoutes.js";
